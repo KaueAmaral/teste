@@ -1,0 +1,50 @@
+package com.suporte.operacional.service;
+
+import com.suporte.operacional.model.Registro;
+import com.suporte.operacional.repository.RegistroRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class RegistroService {
+
+    private final RegistroRepository repository;
+
+    public RegistroService(RegistroRepository repository) {
+        this.repository = repository;
+    }
+
+    // Adicionar novo registro
+    public Registro addRegistro(Registro registro) {
+        return repository.save(registro);
+    }
+
+    // Listar todos os registros
+    public List<Registro> getAllRegistros() {
+        return repository.findAll();
+    }
+
+    // Consultar por tipo
+    public List<Registro> getByTipo(String tipo) {
+        return repository.findByTipo(tipo);
+    }
+
+    // Consultar por status
+    public List<Registro> getByStatus(String status) {
+        return repository.findByStatus(status);
+    }
+
+    // Alterar status
+    public Registro updateStatus(Long id, String status) {
+        Registro registro = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Registro não encontrado"));
+        registro.setStatus(status);
+        return repository.save(registro);
+    }
+
+    // Contar registros por status
+    public long countByStatus(String status) {
+        return repository.findByStatus(status).size();
+    }
+}
