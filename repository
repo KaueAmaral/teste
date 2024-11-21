@@ -1,0 +1,13 @@
+package com.suporte.operacional.repository;
+
+import com.suporte.operacional.model.Registro;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface RegistroRepository extends JpaRepository<Registro, Long> {
+    List<Registro> findByTipo(String tipo); // Consulta por tipo
+    List<Registro> findByStatus(String status); // Consulta por status
+}
