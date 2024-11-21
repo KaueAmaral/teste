@@ -1,0 +1,54 @@
+package com.suporte.operacional.controller;
+
+import com.suporte.operacional.model.Registro;
+import com.suporte.operacional.service.RegistroService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/registros")
+public class RegistroController {
+
+    private final RegistroService service;
+
+    public RegistroController(RegistroService service) {
+        this.service = service;
+    }
+
+    // Adicionar novo registro
+    @PostMapping
+    public Registro addRegistro(@RequestBody Registro registro) {
+        return service.addRegistro(registro);
+    }
+
+    // Listar todos os registros
+    @GetMapping
+    public List<Registro> getAllRegistros() {
+        return service.getAllRegistros();
+    }
+
+    // Consultar por tipo
+    @GetMapping("/tipo/{tipo}")
+    public List<Registro> getByTipo(@PathVariable String tipo) {
+        return service.getByTipo(tipo);
+    }
+
+    // Consultar por status
+    @GetMapping("/status/{status}")
+    public List<Registro> getByStatus(@PathVariable String status) {
+        return service.getByStatus(status);
+    }
+
+    // Alterar status
+    @PutMapping("/{id}/status")
+    public Registro updateStatus(@PathVariable Long id, @RequestBody String status) {
+        return service.updateStatus(id, status);
+    }
+
+    // Contar registros por status
+    @GetMapping("/count/status")
+    public long countByStatus(@RequestParam String status) {
+        return service.countByStatus(status);
+    }
+}
