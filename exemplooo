@@ -1,0 +1,10 @@
+src/main/java/com/suporte/operacional/
+├── controller/
+│   └── RegistroController.java
+├── model/
+│   └── Registro.java
+├── repository/
+│   └── RegistroRepository.java
+├── service/
+│   └── RegistroService.java
+└── SuporteOperacionalApplication.java
